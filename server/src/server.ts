@@ -15,7 +15,7 @@ const { DB_PASSWORD, DB_USER_NAME } = process.env;
 app.use(cors());
 app.use(express.json());
 
-app.use('/products', productRoutes);
+app.use('/product', productRoutes);
 
 mongoose
 	.connect(`mongodb+srv://${DB_USER_NAME}:${DB_PASSWORD}@plugo.n38j8uj.mongodb.net/?retryWrites=true&w=majority`, {})
