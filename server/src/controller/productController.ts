@@ -1,7 +1,7 @@
-import express from 'express';
+import { Request, Response } from 'express';
 import Product from 'models/Product';
 
-const addProduct = async (req: express.Request, res: express.Response) => {
+const addProduct = async (req: Request, res: Response) => {
 	const { name, description, price, imageUrl } = req.body;
 
 	try {
@@ -14,7 +14,7 @@ const addProduct = async (req: express.Request, res: express.Response) => {
 	}
 };
 
-const getProductList = async (req: express.Request, res: express.Response) => {
+const getProductList = async (req: Request, res: Response) => {
 	try {
 		const products = await Product.find();
 
@@ -31,14 +31,15 @@ const getProductList = async (req: express.Request, res: express.Response) => {
 	}
 };
 
-const getProductById = async (req: express.Request, res: express.Response) => {
+const getProductById = async (req: Request, res: Response) => {
 	const { id } = req.params;
 
 	try {
 		const product = await Product.findById(id);
 
 		if (!product) {
-			return res.status(404).json({ error: 'Product not found' });
+			res.status(404).json({ error: 'Product not found' });
+			return undefined;
 		}
 
 		res.json({
