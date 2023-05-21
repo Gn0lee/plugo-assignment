@@ -8,7 +8,13 @@ const addProduct = async (req: Request, res: Response) => {
 		const newProduct = new Product({ name, description, price, imageUrl });
 		const product = await newProduct.save();
 
-		res.json(product);
+		res.json({
+			id: product._id.toString(),
+			name: product.name,
+			imageUrl: product.imageUrl,
+			description: product.description,
+			price: product.price,
+		});
 	} catch (error) {
 		res.status(500).json({ error: 'internal server error' });
 	}
@@ -20,7 +26,7 @@ const getProductList = async (req: Request, res: Response) => {
 
 		res.json(
 			products.map(product => ({
-				id: product._id,
+				id: product._id.toString(),
 				name: product.name,
 				imageUrl: product.imageUrl,
 				price: product.price,
@@ -43,7 +49,7 @@ const getProductById = async (req: Request, res: Response) => {
 		}
 
 		res.json({
-			id: product._id,
+			id: product._id.toString(),
 			name: product.name,
 			imageUrl: product.imageUrl,
 			description: product.description,
