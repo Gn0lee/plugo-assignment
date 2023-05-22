@@ -4,6 +4,8 @@
 import { jsx, css, SerializedStyles } from '@emotion/react';
 import React from 'react';
 
+import type { validation } from 'common/types/validation';
+
 export interface TextinputProps {
 	id?: string;
 	label?: React.ReactNode;
@@ -18,7 +20,7 @@ export interface TextinputProps {
 	max?: number;
 	min?: number;
 	step?: number;
-	validation?: 'none' | 'pass' | 'fail';
+	validation?: validation;
 	containerEmotionCss?: SerializedStyles | SerializedStyles[];
 	labelEmotionCss?: SerializedStyles | SerializedStyles[];
 	inputEmotionCss?: SerializedStyles | SerializedStyles[];

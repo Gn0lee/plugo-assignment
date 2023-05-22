@@ -3,6 +3,8 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import EmptyOutlet from 'common/layout/EmptyOutlet';
 import Layout from 'common/layout/Layout';
 
+import AddProduct from 'pages/AddProduct';
+
 export default function Router() {
 	return (
 		<Routes>
@@ -13,7 +15,7 @@ export default function Router() {
 					<Route path=":id" element={<h1>product</h1>} />
 				</Route>
 				<Route path="cart" element={<h1>cart</h1>} />
-				<Route path="admin" element={<h1>admin</h1>} />
+				<Route path="admin" element={<AddProduct />} />
 				<Route path="*" element={<h1>404</h1>} />
 			</Route>
 		</Routes>
