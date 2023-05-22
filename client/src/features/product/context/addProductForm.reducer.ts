@@ -1,22 +1,22 @@
-import type { validation } from 'common/types/validation';
+import type { validationType } from 'common/types/validationType';
 
 import type { Product } from 'features/product/types/product.type';
 import { rNumber } from 'features/product/utils/regex';
 
 export interface AddProductForm extends Omit<Product, 'id'> {
-	nameValidation: validation;
+	nameValidation: validationType;
 	isNameValid: boolean;
 	isNameChanged: boolean;
 	nameHelpText: string;
-	descriptionValidation: validation;
+	descriptionValidation: validationType;
 	isDescriptionValid: boolean;
 	isDescriptionChanged: boolean;
 	descriptionHelpText: string;
-	priceValidation: validation;
+	priceValidation: validationType;
 	isPriceValid: boolean;
 	isPriceChanged: boolean;
 	priceHelpText: string;
-	imageUrlValidation: validation;
+	imageUrlValidation: validationType;
 	isImageUrlValid: boolean;
 	isImageUrlChanged: boolean;
 	imageUrlHelpText: string;
@@ -62,7 +62,7 @@ export const VALIDATE_PRICE = 'VALIDATE_PRICE';
 export const UPDATE_IMG_URL = 'UPDATE_IMG_URL';
 export const VALIDATE_IMG_URL = 'VALIDATE_IMG_URL';
 
-export const organizationNameFormReducer = (state: AddProductForm, action: AddProductFormAction): AddProductForm => {
+export const addProductFormReducer = (state: AddProductForm, action: AddProductFormAction): AddProductForm => {
 	switch (action.type) {
 		case UPDATE_NAME: {
 			const isPayloadValid = (action.payload ?? '').trim().length > 0;
@@ -96,7 +96,7 @@ export const organizationNameFormReducer = (state: AddProductForm, action: AddPr
 		}
 
 		case VALIDATE_DESCRIPTION: {
-			const isDescriptionStateValid = state.name.trim().length > 0;
+			const isDescriptionStateValid = state.description.trim().length > 0;
 			return {
 				...state,
 				isDescriptionValid: state.isDescriptionChanged ? isDescriptionStateValid : false,

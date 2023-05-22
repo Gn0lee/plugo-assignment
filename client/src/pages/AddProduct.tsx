@@ -3,10 +3,13 @@
 
 import { jsx, css } from '@emotion/react';
 
+import AddProductForm from 'features/product/components/AddProductForm';
+
 export default function AddProduct() {
 	return (
 		<div css={containerSt}>
 			<h2>상품 추가</h2>
+			<AddProductForm />
 		</div>
 	);
 }

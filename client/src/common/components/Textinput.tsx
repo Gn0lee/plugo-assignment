@@ -4,14 +4,14 @@
 import { jsx, css, SerializedStyles } from '@emotion/react';
 import React from 'react';
 
-import type { validation } from 'common/types/validation';
+import type { validationType } from 'common/types/validationType';
 
 export interface TextinputProps {
 	id?: string;
 	label?: React.ReactNode;
 	name?: string;
 	placeholder?: string;
-	value?: string;
+	value?: string | number;
 	type?: 'text' | 'number';
 	helpText?: React.ReactNode;
 	disabled?: boolean;
@@ -20,7 +20,7 @@ export interface TextinputProps {
 	max?: number;
 	min?: number;
 	step?: number;
-	validation?: validation;
+	validation?: validationType;
 	containerEmotionCss?: SerializedStyles | SerializedStyles[];
 	labelEmotionCss?: SerializedStyles | SerializedStyles[];
 	inputEmotionCss?: SerializedStyles | SerializedStyles[];
@@ -51,7 +51,7 @@ export default function Textinput({
 		<div css={[containerSt, containerEmotionCss]}>
 			{label ? <div css={[labelSt({ disabled }), labelEmotionCss]}>{label}</div> : null}
 			<input
-				css={[inputValidationSt[validation], inputSt, inputEmotionCss]}
+				css={[inputSt, inputValidationSt[validation], inputEmotionCss]}
 				id={id}
 				name={name}
 				placeholder={placeholder}
@@ -87,8 +87,11 @@ const labelSt = ({ disabled }: Pick<TextinputProps, 'disabled'>) => css`
 const inputSt = css`
 	border: 1px solid #b1b1b1;
 
-	padding: 0 16px;
+	padding: 8px 16px;
 	width: 100%;
+	height: 40px;
+
+	border-radius: 8px;
 
 	line-height: 140%;
 
@@ -148,6 +151,8 @@ const inputValidationSt = {
 		}
 	`,
 	fail: css`
+		border: 1px solid #d91f29;
+
 		:hover {
 			border: 1px solid #d91f29;
 		}

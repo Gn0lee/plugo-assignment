@@ -27,16 +27,28 @@ const buttonSt = css`
 	font-weight: 500;
 	font-size: 16px;
 
+	height: 42px;
+
 	cursor: pointer;
+
+	color: #fafafa;
+	background: #122e99;
 
 	:disabled {
 		cursor: not-allowed;
 		color: #d5d5d5;
 		background: #b1b1b1;
+		border: none;
+
+		:hover {
+			color: #d5d5d5;
+			background: #b1b1b1;
+			border: none;
+		}
 	}
 
 	:hover {
-		background: #122e99;
+		background: #0d1f66;
 	}
 
 	padding: 12px 16px;
