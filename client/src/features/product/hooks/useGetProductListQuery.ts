@@ -8,8 +8,8 @@ export default function useGetProductListQuery() {
 	return useQuery({
 		queryKey: [queryKeys.productList],
 		queryFn: getProductListApi,
-		refetchOnMount: false,
-		refetchOnWindowFocus: false,
+		refetchOnMount: true,
+		refetchOnWindowFocus: true,
 		staleTime: 1000 * 60 * 10,
 	});
 }
