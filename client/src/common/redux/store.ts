@@ -1,7 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 
-const rootReducer = {};
+import productPreviewSlice from 'features/product/context/productPreviewSlice';
+
+const rootReducer = {
+	productPreview: productPreviewSlice,
+};
 
 const store = configureStore({
 	reducer: rootReducer,

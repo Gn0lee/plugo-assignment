@@ -6,6 +6,7 @@ import React, { useReducer } from 'react';
 
 import Button from 'common/components/Button';
 import Textinput from 'common/components/Textinput';
+import { useAppDispatch } from 'common/redux/store';
 
 import {
 	initialFormData,
@@ -19,8 +20,12 @@ import {
 	VALIDATE_NAME,
 	addProductFormReducer,
 } from 'features/product/context/addProductForm.reducer';
+import ProductPreview from 'features/product/components/ProductPreview';
+import { setProductPreviewData } from 'features/product/context/productPreviewSlice';
 
 export default function AddProductForm() {
+	const dispatch = useAppDispatch();
+
 	const [addProductFormData, setAddProductFormData] = useReducer(addProductFormReducer, initialFormData);
 
 	const {
@@ -82,6 +87,10 @@ export default function AddProductForm() {
 		event.preventDefault();
 	};
 
+	const handlePreviewButtonClick = () => {
+		dispatch(setProductPreviewData({ name, imageUrl, price, description }));
+	};
+
 	return (
 		<div css={container}>
 			<form css={formSt} onSubmit={handleFormSubmit}>
@@ -138,6 +147,7 @@ export default function AddProductForm() {
 							}
 						`}
 						disabled={!isNameValid || !isPriceValid || !isDescriptionValid || !isImageUrlValid}
+						onClick={handlePreviewButtonClick}
 					>
 						미리보기
 					</Button>
@@ -151,6 +161,7 @@ export default function AddProductForm() {
 					</Button>
 				</div>
 			</form>
+			<ProductPreview />
 		</div>
 	);
 }
@@ -158,7 +169,7 @@ export default function AddProductForm() {
 const container = css`
 	display: flex;
 	align-items: flex-start;
-	gap: 16px;
+	gap: 64px;
 `;
 
 const formSt = css`
