@@ -22,9 +22,12 @@ import {
 } from 'features/product/context/addProductForm.reducer';
 import ProductPreview from 'features/product/components/ProductPreview';
 import { setProductPreviewData } from 'features/product/context/productPreviewSlice';
+import usePostProductQuery from 'features/product/hooks/usePostProductQuery';
 
 export default function AddProductForm() {
 	const dispatch = useAppDispatch();
+
+	const { mutate, isLoading } = usePostProductQuery();
 
 	const [addProductFormData, setAddProductFormData] = useReducer(addProductFormReducer, initialFormData);
 
@@ -85,6 +88,7 @@ export default function AddProductForm() {
 
 	const handleFormSubmit: React.FormEventHandler<HTMLFormElement> = event => {
 		event.preventDefault();
+		mutate({ name, description, price, imageUrl });
 	};
 
 	const handlePreviewButtonClick = () => {
@@ -155,7 +159,7 @@ export default function AddProductForm() {
 						buttonEmotionCss={css`
 							width: 100%;
 						`}
-						disabled={!isNameValid || !isPriceValid || !isDescriptionValid || !isImageUrlValid}
+						disabled={!isNameValid || !isPriceValid || !isDescriptionValid || !isImageUrlValid || isLoading}
 					>
 						추가
 					</Button>

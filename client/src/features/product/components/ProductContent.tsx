@@ -7,23 +7,16 @@ import React from 'react';
 import type { Product } from 'features/product/types/product.type';
 import ImageNotFound from 'features/product/assets/img_not_found.png';
 
-interface ProductContentProps extends Product {
-	dataUpdatedAt?: number;
-}
+interface ProductContentProps extends Product {}
 
-export default function ProductContent({ name, dataUpdatedAt, price, imageUrl }: ProductContentProps) {
+export default function ProductContent({ name, price, imageUrl }: ProductContentProps) {
 	const handleError: React.ReactEventHandler<HTMLImageElement> = e => {
 		e.currentTarget.src = ImageNotFound;
 	};
 
 	return (
 		<div css={containerSt}>
-			<img
-				css={imageSt}
-				onError={handleError}
-				src={dataUpdatedAt ? `${imageUrl}?${dataUpdatedAt}` : imageUrl}
-				alt="img"
-			/>
+			<img css={imageSt} onError={handleError} src={imageUrl} alt="img" />
 			<div css={contentBox}>
 				<div css={nameSt}>{name}</div>
 				<div css={priceSt}>{price}&nbsp;원</div>
