@@ -4,6 +4,7 @@ import EmptyOutlet from 'common/layout/EmptyOutlet';
 import Layout from 'common/layout/Layout';
 
 import AddProduct from 'pages/AddProduct';
+import Products from 'pages/Products';
 
 export default function Router() {
 	return (
@@ -11,7 +12,7 @@ export default function Router() {
 			<Route path="/" element={<Navigate to="products" />} />
 			<Route path="" element={<Layout />}>
 				<Route path="products" element={<EmptyOutlet />}>
-					<Route path="" element={<h1>products</h1>} />
+					<Route path="" element={<Products />} />
 					<Route path=":id" element={<h1>product</h1>} />
 				</Route>
 				<Route path="cart" element={<h1>cart</h1>} />

@@ -3,11 +3,20 @@
 
 import { jsx, css } from '@emotion/react';
 import { AiOutlineSearch } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
+	const navigate = useNavigate();
+
+	const handlePlugoClick = () => {
+		navigate('/');
+	};
+
 	return (
 		<header css={containerSt}>
-			<div css={titleSt}>Plugo</div>
+			<div css={titleSt} aria-hidden onClick={handlePlugoClick}>
+				Plugo
+			</div>
 			<div css={iconBoxSt}>
 				<AiOutlineSearch size={24} />
 			</div>
@@ -33,9 +42,12 @@ const containerSt = css`
 `;
 
 const titleSt = css`
-	font-size: 16px;
-	font-weight: 500;
+	font-size: 24px;
+	font-weight: 800;
 	color: #303030;
+	letter-spacing: 0.4px;
+
+	cursor: pointer;
 `;
 
 const iconBoxSt = css`
