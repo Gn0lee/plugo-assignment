@@ -26,6 +26,10 @@ const containerSt = css`
 	height: 64px;
 
 	padding: 16px;
+
+	background-color: rgb(250, 250, 250);
+
+	border-bottom: 1px solid rgb(213, 213, 213);
 `;
 
 const titleSt = css`

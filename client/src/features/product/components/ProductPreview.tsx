@@ -10,5 +10,7 @@ import ProductContent from 'features/product/components/ProductContent';
 export default function ProductPreview() {
 	const { name, description, price, imageUrl } = useSelector((state: RootState) => state.productPreview);
 
-	return <ProductContent name={name} price={price} description={description} id="preview" imageUrl={imageUrl} />;
+	return (
+		<ProductContent name={name} price={price} description={description} id="preview" imageUrl={imageUrl} isPreview />
+	);
 }

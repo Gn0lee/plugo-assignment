@@ -28,7 +28,7 @@ const containerSt = css`
 	width: 100%;
 	height: 100%;
 
-	background: #fafafa;
+	background: rgb(245, 245, 245);
 `;
 
 const lowerBoxSt = css`

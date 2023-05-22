@@ -2,20 +2,31 @@
 /** @jsx jsx */
 
 import { jsx, css } from '@emotion/react';
+import { useNavigate } from 'react-router-dom';
 import React from 'react';
 
 import type { Product } from 'features/product/types/product.type';
 import ImageNotFound from 'features/product/assets/img_not_found.png';
 
-interface ProductContentProps extends Product {}
+interface ProductContentProps extends Product {
+	isPreview?: boolean;
+}
 
-export default function ProductContent({ name, price, imageUrl }: ProductContentProps) {
+export default function ProductContent({ name, price, imageUrl, isPreview = false, id }: ProductContentProps) {
+	const navigate = useNavigate();
+
 	const handleError: React.ReactEventHandler<HTMLImageElement> = e => {
 		e.currentTarget.src = ImageNotFound;
 	};
 
+	const handleContentClick = () => {
+		if (!isPreview) {
+			navigate(id);
+		}
+	};
+
 	return (
-		<div css={containerSt}>
+		<div css={containerSt} aria-hidden onClick={handleContentClick}>
 			<img css={imageSt} onError={handleError} src={imageUrl} alt="img" />
 			<div css={contentBox}>
 				<div css={nameSt}>{name}</div>
@@ -31,6 +42,8 @@ const containerSt = css`
 	gap: 16px;
 
 	width: 200px;
+
+	cursor: pointer;
 `;
 
 const contentBox = css`
