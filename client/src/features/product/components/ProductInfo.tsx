@@ -10,7 +10,7 @@ import Button from 'common/components/Button';
 
 import ImageNotFound from 'features/product/assets/img_not_found.png';
 import useGetProductDetailQuery from 'features/product/hooks/useGetProductDetailQuery';
-import useGetCartNumberQuery from 'features/product/hooks/useGetCartNumberQuery';
+import useGetCartNumberQuery from 'features/cart/hooks/useGetCartNumberQuery';
 
 export default function ProductInfo() {
 	const { id } = useParams();

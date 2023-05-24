@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import queryKeys from 'common/data/queryKeys';
 
 import type { Product } from 'features/product/types/product.type';
-import getCartNumberApi from 'features/product/api/getCartNumber.api';
+import getCartNumberApi from 'features/cart/api/getCartNumber.api';
 
 interface UseGetProductDetailQueryProps {
 	id?: Product['id'];

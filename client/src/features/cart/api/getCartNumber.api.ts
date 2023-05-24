@@ -7,7 +7,7 @@ export interface GetCartNumberApiProps {
 }
 
 export default async function getCartNumberApi({ id }: GetCartNumberApiProps) {
-	const { data } = await axiosInstance.get<{ number: number }>(`/product/cart-number/${id}`);
+	const { data } = await axiosInstance.get<{ number: number }>(`/cart/number/${id}`);
 
 	return data;
 }
