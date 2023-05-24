@@ -11,11 +11,11 @@ import SideNavBar from 'common/components/SideNavBar';
 export default function Layout() {
 	return (
 		<main css={containerSt}>
+			<ToastContainer autoClose={1500} />
 			<Header />
 			<div css={lowerBoxSt}>
 				<SideNavBar />
 				<div css={outletBoxSt}>
-					<ToastContainer autoClose={1500} />
 					<Outlet />
 				</div>
 			</div>
