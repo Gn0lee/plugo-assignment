@@ -202,6 +202,6 @@ export const addProductFormReducer = (state: AddProductForm, action: AddProductF
 		}
 
 		default:
-			return initialFormData;
+			return { ...initialFormData };
 	}
 };

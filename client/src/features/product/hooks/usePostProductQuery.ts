@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from 'react-query';
+import { toast } from 'react-toastify';
 
 import queryKeys from 'common/data/queryKeys';
 
@@ -12,6 +13,9 @@ export default function usePostProductQuery() {
 		mutationFn: variables => postProductApi({ ...variables }),
 		onSuccess: () => {
 			queryClient.invalidateQueries([queryKeys.productList]);
+		},
+		onError: () => {
+			toast('상품 추가에 실패했습니다.', { type: 'error' });
 		},
 	});
 }

@@ -2,10 +2,12 @@
 /** @jsx jsx */
 
 import { jsx, css } from '@emotion/react';
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
 
 import Button from 'common/components/Button';
 import Textinput from 'common/components/Textinput';
+import Textarea from 'common/components/Textarea';
 import { useAppDispatch } from 'common/redux/store';
 
 import {
@@ -27,7 +29,7 @@ import usePostProductQuery from 'features/product/hooks/usePostProductQuery';
 export default function AddProductForm() {
 	const dispatch = useAppDispatch();
 
-	const { mutate, isLoading } = usePostProductQuery();
+	const { mutate, isLoading, isSuccess } = usePostProductQuery();
 
 	const [addProductFormData, setAddProductFormData] = useReducer(addProductFormReducer, initialFormData);
 
@@ -62,7 +64,7 @@ export default function AddProductForm() {
 		setAddProductFormData({ type: VALIDATE_NAME });
 	};
 
-	const handleDescriptionChange: React.ChangeEventHandler<HTMLInputElement> = event => {
+	const handleDescriptionChange: React.ChangeEventHandler<HTMLTextAreaElement> = event => {
 		setAddProductFormData({ type: UPDATE_DESCRIPTION, payload: event.target.value });
 	};
 
@@ -95,6 +97,14 @@ export default function AddProductForm() {
 		dispatch(setProductPreviewData({ name, imageUrl, price, description }));
 	};
 
+	useEffect(() => {
+		if (isSuccess) {
+			toast('상품이 추가되었습니다', { type: 'success' });
+			setAddProductFormData({});
+			dispatch(setProductPreviewData({ name: '', imageUrl: '', price: 0, description: '' }));
+		}
+	}, [isSuccess, dispatch]);
+
 	return (
 		<div css={container}>
 			<form css={formSt} onSubmit={handleFormSubmit}>
@@ -107,7 +117,7 @@ export default function AddProductForm() {
 					helpText={isNameChanged && !isNameValid && nameHelpText}
 					label="이름"
 				/>
-				<Textinput
+				<Textarea
 					id="description"
 					value={description}
 					onChange={handleDescriptionChange}

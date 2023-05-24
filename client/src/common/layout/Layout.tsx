@@ -3,6 +3,7 @@
 
 import { jsx, css } from '@emotion/react';
 import { Outlet } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 import Header from 'common/components/Header';
 import SideNavBar from 'common/components/SideNavBar';
@@ -14,6 +15,7 @@ export default function Layout() {
 			<div css={lowerBoxSt}>
 				<SideNavBar />
 				<div css={outletBoxSt}>
+					<ToastContainer autoClose={1500} />
 					<Outlet />
 				</div>
 			</div>
@@ -35,7 +37,7 @@ const lowerBoxSt = css`
 	display: flex;
 
 	width: 100%;
-	height: 100%;
+	height: calc(100% - 64px);
 	gap: 0;
 `;
 
