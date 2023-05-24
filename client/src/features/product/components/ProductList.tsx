@@ -27,5 +27,5 @@ const containerSt = css`
 	flex-wrap: wrap;
 
 	gap: 16px;
-	row-gap: 8px;
+	row-gap: 16px;
 `;

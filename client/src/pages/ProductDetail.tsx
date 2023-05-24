@@ -27,5 +27,7 @@ const containerSt = css`
 	flex-direction: column;
 	gap: 16px;
 
+	width: fit-content;
+
 	padding: 32px 24px 48px 24px;
 `;

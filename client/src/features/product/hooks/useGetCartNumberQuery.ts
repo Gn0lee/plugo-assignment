@@ -11,10 +11,10 @@ interface UseGetProductDetailQueryProps {
 
 export default function useGetCartNumberQuery({ id }: UseGetProductDetailQueryProps) {
 	return useQuery({
-		queryKey: [queryKeys.productDetail, id ?? ''],
+		queryKey: [queryKeys.cartNumber, id ?? ''],
 		queryFn: () => getCartNumberApi({ id }),
-		refetchOnMount: true,
-		refetchOnWindowFocus: true,
+		refetchOnMount: false,
+		refetchOnWindowFocus: false,
 		enabled: !!id,
 	});
 }
