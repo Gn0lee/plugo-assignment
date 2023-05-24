@@ -4,8 +4,12 @@
 import { jsx, css } from '@emotion/react';
 import { useNavigate } from 'react-router-dom';
 
+import useGetCartListQuery from 'features/cart/hooks/useGetCartListQuery';
+
 export default function SideNavBar() {
 	const navigate = useNavigate();
+
+	const { data: cartList, isSuccess } = useGetCartListQuery();
 
 	const handleAdminClick = () => {
 		navigate('/admin');
@@ -27,8 +31,9 @@ export default function SideNavBar() {
 			<div css={contentSt} aria-hidden onClick={handleProductsClick}>
 				상품 목록
 			</div>
-			<div css={contentSt} aria-hidden onClick={handleCartClick}>
-				장바구니
+			<div css={menuContainer} aria-hidden onClick={handleCartClick}>
+				<div>장바구니</div>
+				{isSuccess && cartList.length > 0 ? <div css={badgeSt}>{cartList.length}</div> : null}
 			</div>
 		</nav>
 	);
@@ -50,12 +55,52 @@ const contentSt = css`
 	padding: 16px 24px;
 	color: rgb(48, 48, 48);
 	font-weight: 500;
-	font-size: 14px;
-	line-height: 140%;
+	font-size: 16px;
 	letter-spacing: 0.16px;
 	cursor: pointer;
+
+	height: 50px;
 
 	:hover {
 		background-color: lightgray;
 	}
+`;
+
+const menuContainer = css`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	padding: 16px 24px;
+	color: rgb(48, 48, 48);
+	font-weight: 500;
+	font-size: 16px;
+
+	letter-spacing: 0.16px;
+	cursor: pointer;
+
+	height: 50px;
+
+	:hover {
+		background-color: lightgray;
+	}
+`;
+
+const badgeSt = css`
+	color: #fafafa;
+	font-size: 12px;
+
+	background-color: #d91f29;
+
+	text-align: center;
+
+	height: 16px;
+	width: fit-content;
+	min-width: 16px;
+
+	padding: 2px 4px;
+
+	border-radius: 8px;
+
+	line-height: 16px;
 `;

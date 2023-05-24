@@ -11,6 +11,7 @@ import Button from 'common/components/Button';
 import ImageNotFound from 'features/product/assets/img_not_found.png';
 import useGetProductDetailQuery from 'features/product/hooks/useGetProductDetailQuery';
 import useGetCartNumberQuery from 'features/cart/hooks/useGetCartNumberQuery';
+import usePostCartQuery from 'features/cart/hooks/usePostCartQuery';
 
 export default function ProductInfo() {
 	const { id } = useParams();
@@ -18,6 +19,8 @@ export default function ProductInfo() {
 	const { data: productDetail } = useGetProductDetailQuery({ id });
 
 	const { data: initialCartNumber } = useGetCartNumberQuery({ id });
+
+	const { mutate } = usePostCartQuery();
 
 	const [cartNumber, setCartNumber] = useState<number>(initialCartNumber?.number ?? 0);
 
@@ -38,6 +41,10 @@ export default function ProductInfo() {
 	};
 
 	const { description, id: productId, name, price, imageUrl } = productDetail;
+
+	const handleAddCart = () => {
+		mutate({ id: productId, quantity: cartNumber });
+	};
 
 	return (
 		<div css={containerSt}>
@@ -65,6 +72,8 @@ export default function ProductInfo() {
 						buttonEmotionCss={css`
 							justify-self: flex-end;
 						`}
+						onClick={handleAddCart}
+						disabled={cartNumber < 1}
 					>
 						장바구니 추가
 					</Button>

@@ -1,14 +1,11 @@
 import axiosInstance from 'common/api/instance';
 
-import type { Product } from 'features/product/types/product.type';
 import type { Cart } from 'features/cart/types/cart.type';
 
-export interface PostCartApiProps {
-	products: Pick<Cart, 'id' | 'quantity'>[];
-}
+export interface PostCartApiProps extends Pick<Cart, 'id' | 'quantity'> {}
 
-export default async function postCartApi({ products }: PostCartApiProps) {
-	const { data } = await axiosInstance.post<Product>('/cart', { products });
+export default async function postCartApi({ quantity, id }: PostCartApiProps) {
+	const { data } = await axiosInstance.post<{ success: boolean }>('/cart', { id, quantity });
 
 	return data;
 }
