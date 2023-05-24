@@ -49,3 +49,18 @@ export const getCartList = async (req: Request, res: Response) => {
 
 	res.json([]);
 };
+
+export const getCartNumberById = (req: Request, res: Response) => {
+	if (req.session.cart) {
+		const { id } = req.params;
+
+		const cartQuantity = req.session.cart[id];
+
+		if (cartQuantity) {
+			res.json({ number: cartQuantity });
+		}
+		return undefined;
+	}
+
+	res.json({ number: 0 });
+};
