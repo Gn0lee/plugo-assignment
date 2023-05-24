@@ -3,17 +3,15 @@ import { Request, Response } from 'express';
 import Product from 'models/Product';
 
 export const addToCart = (req: Request, res: Response) => {
-	const { products } = req.body;
+	const { id, quantity } = req.body;
 
 	if (req.session.cart === undefined) {
 		req.session.cart = {};
 	}
 
-	products.forEach((product: { id: string; quantity: number }) => {
-		if (req.session.cart) {
-			req.session.cart[product.id] = product.quantity;
-		}
-	});
+	req.session.cart[id] = quantity;
+
+	req.session.save();
 
 	res.json({ success: true });
 };
@@ -44,10 +42,9 @@ export const getCartList = async (req: Request, res: Response) => {
 		} catch (e) {
 			res.status(500).json({ error: 'internal server error' });
 		}
-		return undefined;
+	} else {
+		res.json([]);
 	}
-
-	res.json([]);
 };
 
 export const getCartNumberById = (req: Request, res: Response) => {
@@ -58,9 +55,10 @@ export const getCartNumberById = (req: Request, res: Response) => {
 
 		if (cartQuantity) {
 			res.json({ number: cartQuantity });
+		} else {
+			res.json({ number: 0 });
 		}
-		return undefined;
+	} else {
+		res.json({ number: 0 });
 	}
-
-	res.json({ number: 0 });
 };

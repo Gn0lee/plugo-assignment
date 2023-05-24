@@ -15,15 +15,22 @@ const port = 4000;
 const { DB_PASSWORD, DB_USER_NAME } = process.env;
 
 app.use(
+	cors({
+		origin: 'http://localhost:3000',
+		credentials: true,
+	})
+);
+
+app.use(express.json());
+
+app.use(
 	session({
 		secret: 'secret-key-plugo!@!',
 		resave: false,
 		saveUninitialized: true,
-		cookie: { secure: false },
+		cookie: { secure: false, httpOnly: false },
 	})
 );
-app.use(cors());
-app.use(express.json());
 
 app.use('/product', productRoutes);
 app.use('/cart', cartRoutes);
