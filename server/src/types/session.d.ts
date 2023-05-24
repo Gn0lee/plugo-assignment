@@ -1,6 +1,6 @@
 declare module 'express-session' {
 	interface SessionData {
-		cart?: { [key: string]: number };
+		cart?: Array<[string, { quantity: number; selected: boolean }]>;
 	}
 }
 
