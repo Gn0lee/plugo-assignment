@@ -1,9 +1,9 @@
 import axiosInstance from 'common/api/instance';
 
-import type { Cart } from 'features/cart/types/cart.type';
+import type { GetCartApiResponse } from 'features/cart/types/cart.type';
 
 export default async function getCartListApi() {
-	const { data } = await axiosInstance.get<Cart[]>('/cart/list');
+	const { data } = await axiosInstance.get<GetCartApiResponse>('/cart/list');
 
 	return data;
 }

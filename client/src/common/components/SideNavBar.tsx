@@ -9,7 +9,7 @@ import useGetCartListQuery from 'features/cart/hooks/useGetCartListQuery';
 export default function SideNavBar() {
 	const navigate = useNavigate();
 
-	const { data: cartList, isSuccess } = useGetCartListQuery();
+	const { data: getCartListResponse, isSuccess } = useGetCartListQuery();
 
 	const handleAdminClick = () => {
 		navigate('/admin');
@@ -33,7 +33,9 @@ export default function SideNavBar() {
 			</div>
 			<div css={menuContainer} aria-hidden onClick={handleCartClick}>
 				<div>장바구니</div>
-				{isSuccess && cartList.length > 0 ? <div css={badgeSt}>{cartList.length}</div> : null}
+				{isSuccess && getCartListResponse.cart.length > 0 ? (
+					<div css={badgeSt}>{getCartListResponse.cart.length}</div>
+				) : null}
 			</div>
 		</nav>
 	);

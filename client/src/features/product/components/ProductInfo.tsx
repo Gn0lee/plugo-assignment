@@ -20,7 +20,7 @@ export default function ProductInfo() {
 
 	const { data: initialCartNumber } = useGetCartNumberQuery({ id });
 
-	const { mutate } = usePostCartQuery();
+	const { mutate } = usePostCartQuery({ showToast: true });
 
 	const [cartNumber, setCartNumber] = useState<number>(initialCartNumber?.number ?? 0);
 
@@ -43,7 +43,7 @@ export default function ProductInfo() {
 	const { description, id: productId, name, price, imageUrl } = productDetail;
 
 	const handleAddCart = () => {
-		mutate({ id: productId, quantity: cartNumber });
+		mutate({ id: productId, quantity: cartNumber, selected: true });
 	};
 
 	return (
