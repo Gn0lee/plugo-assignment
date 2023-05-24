@@ -2,20 +2,12 @@ import { Router } from 'express';
 
 import { addProduct, getProductById, getProductList } from 'controller/productController';
 
-import { addToCart, getCartList, getCartNumberById } from 'controller/cartController';
+const productRouter = Router();
 
-const router = Router();
+productRouter.post('/', addProduct);
 
-router.post('/', addProduct);
+productRouter.get('/list', getProductList);
 
-router.get('/list', getProductList);
+productRouter.get('/:id', getProductById);
 
-router.get('/:id', getProductById);
-
-router.post('/cart', addToCart);
-
-router.get('/cart/list', getCartList);
-
-router.get('/cart-number/:id', getCartNumberById);
-
-export default router;
+export default productRouter;

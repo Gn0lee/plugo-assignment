@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import session from 'express-session';
 
 import productRoutes from 'routes/productRoutes';
+import cartRoutes from 'routes/cartRoutes';
 
 dotenv.config();
 
@@ -25,6 +26,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/product', productRoutes);
+app.use('/cart', cartRoutes);
 
 mongoose
 	.connect(`mongodb+srv://${DB_USER_NAME}:${DB_PASSWORD}@plugo.n38j8uj.mongodb.net/?retryWrites=true&w=majority`, {})

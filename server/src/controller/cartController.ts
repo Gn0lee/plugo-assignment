@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import Product from 'models/Product';
 
 export const addToCart = (req: Request, res: Response) => {
-	const products = req.body;
+	const { products } = req.body;
 
 	if (req.session.cart === undefined) {
 		req.session.cart = {};
